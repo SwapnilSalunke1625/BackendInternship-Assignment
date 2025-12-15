@@ -134,13 +134,16 @@ npm install
 ### Step 3: Create `.env` File in Backend
 
 ```env
-PORT=5000
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=yourpassword
-DB_NAME=intern_assignment
-JWT_SECRET=your_jwt_secret
-JWT_EXPIRES_IN=1d
+PORT=9090
+MONGODB_URI=
+CORS_ORIGIN=
+
+
+ACCESS_TOKEN_SECRET=
+ACCESS_TOKEN_EXPIRY=
+
+REFRESH_TOKEN_SECRET=
+REFRESH_TOKEN_EXPIRY=
 ```
 
 ### Step 4: Run Backend Server
