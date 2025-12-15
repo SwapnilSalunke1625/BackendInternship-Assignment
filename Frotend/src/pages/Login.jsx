@@ -43,8 +43,15 @@ export default function Login() {
       navigate("/");
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || "Login failed");
-       toast.error("Login Failed!");
+
+      const message =
+        err?.response?.data?.message ||
+        err?.response?.data?.error ||
+        err?.message ||
+        "Login failed";
+
+      setError(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }

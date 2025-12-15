@@ -39,15 +39,19 @@ function Signup() {
     setLoading(true);
 
     try {
-      
       await api.post("/v1/users/register", form);
 
       toast.success("Signup successful!");
       navigate("/login");
     } catch (err) {
-      console.error(err);
-      setError(err.response?.data?.message || "Registration failed");
-       toast.error("Signup failed !");
+       const message =
+        err?.response?.data?.message ||
+        err?.response?.data?.error ||
+        err?.message ||
+        "Signup failed";
+
+      setError(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
