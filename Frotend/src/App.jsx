@@ -9,6 +9,7 @@ import AdminRoute from "./routes/AdminRoute.jsx";
 import AdminDashboard from "./pages/Admin/AdminDashboard.jsx";
 import ManageTasks from "./pages/Admin/ManageTasks.jsx";
 import Homepage from "./pages/Homepage.jsx";
+import UpdatePassword from "./components/UpdatePassword.jsx";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           }
         >
           <Route path="/" element={<Homepage/>} />
+          <Route path="/update-password" element={<UpdatePassword />} />
         </Route>
 
         {/* ADMIN PROTECTED */}
