@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Load user on app start (refresh safe)
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
@@ -19,8 +19,6 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // LOGIN
- // AuthContext.jsx
 const login = async (data) => {
   const res = await api.post("/v1/users/login", data);
 
@@ -32,16 +30,16 @@ const login = async (data) => {
 };
 
 
-  // REGISTER
+
   const register = async (data) => {
     const res = await api.post("/v1/users/register", data);
     return res.data;
   };
 
-  // LOGOUT
+
 const logout = async () => {
   try {
-    await api.post("/v1/users/logout"); // 🔥 CALL BACKEND
+    await api.post("/v1/users/logout"); 
   } catch (err) {
     console.error("Logout failed", err);
   } finally {
@@ -68,7 +66,7 @@ const logout = async () => {
   );
 };
 
-// Custom hook (VERY IMPORTANT)
+
 export const useAuth = () => {
   return useContext(AuthContext);
 };

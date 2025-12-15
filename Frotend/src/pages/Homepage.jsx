@@ -23,7 +23,7 @@ function Homepage() {
     fetchTasks();
   }, []);
 
-  // 🔥 Move task from pending → completed
+
 const handleTaskCompleted = (updatedTask) => {
   setPendingTasks((prev) =>
     prev.filter((t) => t._id !== updatedTask._id)

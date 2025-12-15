@@ -29,7 +29,7 @@ const taskSchema = new Schema(
 
     assignedBy: {
       type: Schema.Types.ObjectId,
-      ref: "User", // ADMIN
+      ref: "User", 
       required: true,
     },
 
@@ -39,7 +39,7 @@ const taskSchema = new Schema(
     },
   },
   {
-    timestamps: true, // createdAt = assigned time
+    timestamps: true, 
   }
 );
 

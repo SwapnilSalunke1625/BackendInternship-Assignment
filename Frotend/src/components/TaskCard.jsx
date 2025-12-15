@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 function TaskCard({ task, onCompleted }) {
   const [loading, setLoading] = useState(false);
 
-  // 🔹 Format helpers
   const formatDateTime = (date) =>
     new Date(date).toLocaleString("en-IN", {
       dateStyle: "medium",
@@ -13,8 +12,7 @@ function TaskCard({ task, onCompleted }) {
     });
 
   const assignedAt = formatDateTime(task.createdAt);
-  const completedAt =
-    task.completedAt && formatDateTime(task.completedAt);
+  const completedAt = task.completedAt && formatDateTime(task.completedAt);
 
   const handleComplete = async () => {
     try {
@@ -34,28 +32,21 @@ function TaskCard({ task, onCompleted }) {
       {/* Header */}
       <div className="flex justify-between text-sm text-gray-500 mb-2">
         <span>
-          Assigned by:{" "}
-          <strong>{task.assignedBy?.name || "Admin"}</strong>
+          Assigned by: <strong>{task.assignedBy?.name || "Admin"}</strong>
         </span>
         {task.status === "PENDING" ? (
           <span>Assigned: {assignedAt}</span>
         ) : (
-          <span className="text-green-600">
-            Completed: {completedAt}
-          </span>
+          <span className="text-green-600">Completed: {completedAt}</span>
         )}
       </div>
 
       {/* Title */}
-      <h3 className="text-lg font-semibold mb-1">
-        {task.title}
-      </h3>
+      <h3 className="text-lg font-semibold mb-1">{task.title}</h3>
 
       {/* Description */}
       {task.description && (
-        <p className="text-gray-600 mb-3">
-          {task.description}
-        </p>
+        <p className="text-gray-600 mb-3">{task.description}</p>
       )}
 
       {/* Action */}

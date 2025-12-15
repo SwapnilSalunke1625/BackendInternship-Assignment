@@ -16,15 +16,12 @@ const AssignTask = () => {
     userId: "",
   });
 
-  // 🔹 Fetch users
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const res = await getAllUsers();
 
-        const normalUsers = res.data.users.filter(
-          (u) => u.role !== "ADMIN"
-        );
+        const normalUsers = res.data.users.filter((u) => u.role !== "ADMIN");
 
         setUsers(normalUsers);
         setFilteredUsers(normalUsers);
@@ -37,19 +34,16 @@ const AssignTask = () => {
     fetchUsers();
   }, []);
 
-  // 🔹 Search filter
   useEffect(() => {
     const q = search.toLowerCase();
     setFilteredUsers(
       users.filter(
         (u) =>
-          u.name.toLowerCase().includes(q) ||
-          u.email.toLowerCase().includes(q)
+          u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q)
       )
     );
   }, [search, users]);
 
-  // 🔹 Assign task
   const handleAssign = async () => {
     if (!form.title || !form.userId) {
       return toast.error("Title and User are required");
@@ -81,9 +75,7 @@ const AssignTask = () => {
         className="border p-2 w-full mb-3"
         placeholder="Task title *"
         value={form.title}
-        onChange={(e) =>
-          setForm({ ...form, title: e.target.value })
-        }
+        onChange={(e) => setForm({ ...form, title: e.target.value })}
       />
 
       {/* Description */}
@@ -91,9 +83,7 @@ const AssignTask = () => {
         className="border p-2 w-full mb-3"
         placeholder="Description (optional)"
         value={form.description}
-        onChange={(e) =>
-          setForm({ ...form, description: e.target.value })
-        }
+        onChange={(e) => setForm({ ...form, description: e.target.value })}
       />
 
       {/* User Select */}
@@ -101,9 +91,7 @@ const AssignTask = () => {
         className="border p-2 w-full mb-2"
         placeholder="Select user"
         value={
-          selectedUser
-            ? `${selectedUser.name} (${selectedUser.email})`
-            : search
+          selectedUser ? `${selectedUser.name} (${selectedUser.email})` : search
         }
         onFocus={() => setShowList(true)}
         onChange={(e) => {
@@ -118,9 +106,7 @@ const AssignTask = () => {
       {showList && (
         <div className="border rounded max-h-40 overflow-y-auto mb-4 bg-white">
           {filteredUsers.length === 0 ? (
-            <p className="p-2 text-sm text-gray-500">
-              No users found
-            </p>
+            <p className="p-2 text-sm text-gray-500">No users found</p>
           ) : (
             filteredUsers.map((u) => (
               <div

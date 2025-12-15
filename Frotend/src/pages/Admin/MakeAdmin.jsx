@@ -7,7 +7,6 @@ const MakeAdmin = () => {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 🔹 Fetch users assigned by THIS admin
   const fetchUsers = async () => {
     try {
       setLoading(true);
@@ -24,23 +23,19 @@ const MakeAdmin = () => {
     fetchUsers();
   }, []);
 
-  // 🔹 Promote user
   const handleMakeAdmin = async (email) => {
     try {
       await api.patch("/v1/admin/makeadmin", { email });
       toast.success("User promoted to Admin");
 
       setUsers((prev) =>
-        prev.map((u) =>
-          u.email === email ? { ...u, role: "ADMIN" } : u
-        )
+        prev.map((u) => (u.email === email ? { ...u, role: "ADMIN" } : u))
       );
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed");
     }
   };
 
-  // 🔍 Search filter
   const filteredUsers = users.filter(
     (user) =>
       user.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -49,11 +44,8 @@ const MakeAdmin = () => {
 
   return (
     <div className="max-w-4xl bg-white p-6 rounded shadow">
-      <h3 className="text-xl font-semibold mb-4">
-        Users Assigned By Me
-      </h3>
+      <h3 className="text-xl font-semibold mb-4">Users Assigned By Me</h3>
 
-      {/* 🔍 Search */}
       <input
         type="text"
         placeholder="Search by name or email"
@@ -82,14 +74,10 @@ const MakeAdmin = () => {
               <tr key={user._id}>
                 <td className="border p-2">{user.name}</td>
                 <td className="border p-2">{user.email}</td>
-                <td className="border p-2 font-semibold">
-                  {user.role}
-                </td>
+                <td className="border p-2 font-semibold">{user.role}</td>
                 <td className="border p-2 text-center">
                   {user.role === "ADMIN" ? (
-                    <span className="text-green-600 font-semibold">
-                      Admin
-                    </span>
+                    <span className="text-green-600 font-semibold">Admin</span>
                   ) : (
                     <button
                       onClick={() => handleMakeAdmin(user.email)}

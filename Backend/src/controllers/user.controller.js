@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 import { User } from "../models/user.model.js";
 import { Task } from "../models/task.model.js";
 
-/* ================= TOKEN GENERATOR ================= */
+
 const generateAccessAndRefreshToken = async (userId) => {
   try {
     const user = await User.findById(userId);
@@ -23,7 +23,7 @@ const generateAccessAndRefreshToken = async (userId) => {
   }
 };
 
-/* ================= REGISTER ================= */
+
 export const registeruser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -45,7 +45,7 @@ export const registeruser = asyncHandler(async (req, res) => {
   });
 });
 
-/* ================= LOGIN ================= */
+
 export const loginuser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -63,8 +63,8 @@ export const loginuser = asyncHandler(async (req, res) => {
 
   const cookieOptions = {
     httpOnly: true,
-    secure: true,      // REQUIRED for Vercel + Render
-    sameSite: "none",  // REQUIRED for cross-domain
+    secure: true,   
+    sameSite: "none",  
   };
 
   res
@@ -83,7 +83,6 @@ export const loginuser = asyncHandler(async (req, res) => {
     });
 });
 
-/* ================= LOGOUT ================= */
 export const logoutuser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(req.user._id, {
     $unset: { refreshToken: 1 },
@@ -105,7 +104,7 @@ export const logoutuser = asyncHandler(async (req, res) => {
     });
 });
 
-/* ================= UPDATE PASSWORD ================= */
+
 export const updatePassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
 
@@ -124,7 +123,7 @@ export const updatePassword = asyncHandler(async (req, res) => {
   });
 });
 
-/* ================= COMPLETE TASK ================= */
+
 export const completeTask = asyncHandler(async (req, res) => {
   const task = await Task.findOne({
     _id: req.params.taskId,
@@ -146,10 +145,10 @@ export const completeTask = asyncHandler(async (req, res) => {
   });
 });
 
-/* ================= GET MY TASKS ================= */
+
 export const getMyTasks = asyncHandler(async (req, res) => {
   const tasks = await Task.find({ assignedTo: req.user._id })
-    .populate("assignedBy", "name email role") // ✅ IMPORTANT
+    .populate("assignedBy", "name email role") 
     .sort({ createdAt: -1 });
 
   res.status(200).json({

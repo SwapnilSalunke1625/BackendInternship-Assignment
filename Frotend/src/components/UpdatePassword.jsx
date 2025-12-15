@@ -30,9 +30,7 @@ const UpdatePassword = () => {
         newPassword: "",
       });
     } catch (err) {
-      toast.error(
-        err.response?.data?.message || "Failed to update password"
-      );
+      toast.error(err.response?.data?.message || "Failed to update password");
     } finally {
       setLoading(false);
     }

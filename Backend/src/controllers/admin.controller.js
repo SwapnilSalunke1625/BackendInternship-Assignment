@@ -3,7 +3,6 @@ import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
-
 export const adminDashboard = asyncHandler(async (req, res) => {
   const tasks = await Task.find()
     .populate("assignedTo", "name email")
@@ -16,7 +15,6 @@ export const adminDashboard = asyncHandler(async (req, res) => {
     tasks,
   });
 });
-
 
 export const assignTask = asyncHandler(async (req, res) => {
   const { title, description, userId } = req.body;
@@ -54,7 +52,6 @@ export const updateTask = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Task not found");
   }
 
-  // ✅ Only update allowed fields
   if (title !== undefined) task.title = title;
   if (description !== undefined) task.description = description;
   if (status !== undefined) task.status = status;
@@ -78,7 +75,6 @@ export const deleteTask = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Task not found");
   }
 
-  // 🔒 Only admin who assigned the task can delete
   if (task.assignedBy.toString() !== req.user._id.toString()) {
     throw new ApiError(403, "You are not allowed to delete this task");
   }
@@ -104,7 +100,7 @@ export const getUsersAssignedByMe = asyncHandler(async (req, res) => {
     });
   }
 
-  // Remove duplicate users
+
   const uniqueUsersMap = new Map();
 
   tasks.forEach(task => {
