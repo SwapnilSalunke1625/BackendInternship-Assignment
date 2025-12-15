@@ -46,13 +46,19 @@ export const assignTask = asyncHandler(async (req, res) => {
 
 
 export const updateTask = asyncHandler(async (req, res) => {
+  const { title, description, status } = req.body;
+
   const task = await Task.findById(req.params.taskId);
 
   if (!task) {
     throw new ApiError(404, "Task not found");
   }
 
-  Object.assign(task, req.body);
+  // ✅ Only update allowed fields
+  if (title !== undefined) task.title = title;
+  if (description !== undefined) task.description = description;
+  if (status !== undefined) task.status = status;
+
   await task.save();
 
   res.status(200).json({
@@ -63,11 +69,18 @@ export const updateTask = asyncHandler(async (req, res) => {
 });
 
 
+
+
 export const deleteTask = asyncHandler(async (req, res) => {
   const task = await Task.findById(req.params.taskId);
 
   if (!task) {
     throw new ApiError(404, "Task not found");
+  }
+
+  // 🔒 Only admin who assigned the task can delete
+  if (task.assignedBy.toString() !== req.user._id.toString()) {
+    throw new ApiError(403, "You are not allowed to delete this task");
   }
 
   await task.deleteOne();
@@ -77,6 +90,7 @@ export const deleteTask = asyncHandler(async (req, res) => {
     message: "Task deleted successfully",
   });
 });
+
 
 export const getUsersAssignedByMe = asyncHandler(async (req, res) => {
   const tasks = await Task.find({ assignedBy: req.user._id })
@@ -144,6 +158,19 @@ export const makeUserAdminByEmail = asyncHandler(async (req, res) => {
     },
   });
 });
+
+export const getAllUsers = asyncHandler(async (req, res) => {
+  const users = await User.find()
+    .select("_id name email role createdAt")
+    .sort({ createdAt: -1 });
+
+  res.status(200).json({
+    success: true,
+    totalUsers: users.length,
+    users,
+  });
+});
+
 
 
 

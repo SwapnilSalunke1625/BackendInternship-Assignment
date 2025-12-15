@@ -60,10 +60,15 @@ const registeruser = asyncHandler(async (req, res) => {
     throw new ApiError(409, "Email is already registered !");
   }
 
+  // Check if there are any admin users
+  const adminCount = await User.countDocuments({ role: "ADMIN" });
+  const role = adminCount === 0 ? "ADMIN" : "USER";
+
   const user = await User.create({
     name,
     email,
     password,
+    role,
   });
 
   console.log("User is registered", {
@@ -110,11 +115,11 @@ const loginuser = asyncHandler(async (req, res) => {
     await generateAccessAndRefreshToken(user._id);
 
   // Set tokens in cookies
-  const options = {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
-  };
+ const options = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "lax", 
+};
 
   res
     .status(200)
@@ -146,9 +151,17 @@ const logoutuser = asyncHandler(async (req, res) => {
     { new: true }
   );
 
- res
-  .clearCookie("accessToken")
-  .clearCookie("refreshToken")
+res
+  .clearCookie("accessToken", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  })
+  .clearCookie("refreshToken", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  })
   .status(200)
   .json({
     success: true,

@@ -5,7 +5,7 @@ export const verifyAdmin = (req, _, next) => {
     throw new ApiError(401, "User not authenticated");
   }
 
-  if (req.user.role !== "admin") {
+  if (req.user.role !== "ADMIN") {
     throw new ApiError(403, "Admin access only");
   }
 
