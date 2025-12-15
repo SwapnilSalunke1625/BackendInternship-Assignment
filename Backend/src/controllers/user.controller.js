@@ -148,9 +148,9 @@ export const completeTask = asyncHandler(async (req, res) => {
 
 /* ================= GET MY TASKS ================= */
 export const getMyTasks = asyncHandler(async (req, res) => {
-  const tasks = await Task.find({ assignedTo: req.user._id }).sort({
-    createdAt: -1,
-  });
+  const tasks = await Task.find({ assignedTo: req.user._id })
+    .populate("assignedBy", "name email role") // ✅ IMPORTANT
+    .sort({ createdAt: -1 });
 
   res.status(200).json({
     success: true,
