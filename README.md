@@ -6,6 +6,9 @@ A **scalable full-stack application** built as part of the **Backend Developer I
 
 This project demonstrates backend engineering fundamentals, clean API design, security best practices, and frontend-backend integration.
 
+Postman link below :
+https://team-7-5309.postman.co/workspace/Mini-Project-II~9089bdd6-abde-4096-8bd9-b3ef1c00c2b7/collection/35038607-5128d8d3-646d-4d76-a587-1ddcdb149a13?action=share&creator=35038607
+
 ---
 
 ## 📑 Table of Contents
