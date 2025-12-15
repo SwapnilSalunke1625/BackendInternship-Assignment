@@ -1,255 +1,272 @@
-# 📌 Backend Developer (Intern) – Assignment  
-## Scalable REST API with Authentication & Role-Based Access
+# 📌 Backend Developer (Intern) – Project Assignment
 
-This project is built as part of the **Backend Developer Intern Assignment**.  
-The focus is on **secure, scalable backend API development**, along with a **basic frontend UI** to demonstrate and test the APIs.
+📄 Important: Please open the PDF file inside the instructions folder to find the Admin login credentials required to access admin features.
+
+A **scalable full-stack application** built as part of the **Backend Developer Intern assignment**, focusing on **secure REST APIs**, **JWT authentication**, **role-based access control**, and a **basic frontend UI** to interact with backend services.
+
+This project demonstrates backend engineering fundamentals, clean API design, security best practices, and frontend-backend integration.
 
 ---
 
-## 🚀 Tech Stack
+## 📑 Table of Contents
+
+1. Project Overview
+2. Tech Stack
+3. Core Features Implemented
+4. Application Flow
+5. Project Access Links
+6. Installation & Setup
+7. Backend Setup
+8. Frontend Setup
+9. Environment Variables Setup
+10. Database Schema
+11. API Documentation
+12. Security & Scalability Notes
+13. Common Commands
+
+
+---
+
+## 1️⃣ Project Overview
+
+This project is a **Scalable REST API with Authentication & Role-Based Access**, accompanied by a **simple frontend UI** for testing and demonstrating API functionality.
+
+The application supports:
+
+* 🔐 User registration & login with JWT authentication
+* 🧑‍💼 Role-based access control (User / Admin)
+* 🗂️ CRUD operations on a secondary entity (e.g., Tasks / Notes / Products)
+* 🌐 Frontend UI to interact with protected APIs
+
+---
+
+## 2️⃣ Tech Stack
 
 ### Backend
-- Node.js
-- Express.js
-- MongoDB (Mongoose)
-- JWT Authentication (Access & Refresh Tokens)
-- bcrypt (Password Hashing)
-- Cookie-based Authentication
-- CORS
+
+* Node.js
+* Express.js
+* JWT Authentication
+* bcrypt (Password Hashing)
+* MySQL / MongoDB / PostgreSQL
 
 ### Frontend
-- React.js
-- React Router
-- Axios
-- Tailwind CSS
-- React Hot Toast
+
+* React.js
+* Axios
+* React Router DOM
+
+### Tools
+
+* Postman / Swagger (API Documentation)
+* Git & GitHub
 
 ---
 
-root
-│
-├── backend
-│ ├── src
-│ │ ├── controllers
-│ │ ├── routes
-│ │ ├── models
-│ │ ├── middlewares
-│ │ ├── utils
-│ │ └── app.js
-│ └── package.json
-│
-├── frontend
-│ ├── src
-│ │ ├── pages
-│ │ ├── components
-│ │ ├── api
-│ │ ├── context
-│ │ └── routes
-│ └── package.json
-│
-└── README.md
+## 3️⃣ Core Features Implemented
 
+### ✅ Backend (Primary Focus)
+
+* User Registration & Login APIs
+* Password hashing using bcrypt
+* JWT-based authentication & authorization
+* Role-based access (Admin vs User)
+* CRUD APIs for secondary entity
+* API versioning
+* Centralized error handling & validation
+
+### ✅ Frontend (Supportive)
+
+* User registration & login UI
+* Protected dashboard (JWT required)
+* CRUD operations via UI
+* API success & error message handling
 
 ---
 
-## ⚙️ Setup Instructions
+## 4️⃣ Application Flow
 
-### 1️⃣ Clone the Repository
+1. User registers or logs in
+2. Backend validates credentials
+3. JWT token is issued
+4. Token stored securely on frontend
+5. Protected routes accessed using JWT
+6. Role-based permissions enforced
+
+---
+
+## 5️⃣ Project Access Links
+
+* 💻 **GitHub Repository:** [GitHub Link]
+* 🌐 **Live Deployment (Optional):** [Deployment Link]
+* 🔗 **LinkedIn Profile:** [LinkedIn Link]
+
+---
+
+## 6️⃣ Installation & Setup
+
+### 🔽 Clone the Repository
+
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
-🔧 Backend Setup
-2️⃣ Install Backend Dependencies
+git clone <repository-url>
+```
+
+```bash
+cd <project-folder>
+```
+
+---
+
+## 7️⃣ Backend Setup
+
+### Step 1: Navigate to Backend Folder
+
+```bash
 cd backend
+```
+
+### Step 2: Install Dependencies
+
+```bash
 npm install
+```
 
-3️⃣ Create .env file (Backend)
-PORT=9090
-MONGODB_URI=your_mongodb_connection_string
+### Step 3: Create `.env` File in Backend
 
-ACCESS_TOKEN_SECRET=your_access_token_secret
-REFRESH_TOKEN_SECRET=your_refresh_token_secret
+```env
+PORT=5000
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=yourpassword
+DB_NAME=intern_assignment
+JWT_SECRET=your_jwt_secret
+JWT_EXPIRES_IN=1d
+```
 
-NODE_ENV=development
-CORS_ORIGIN=http://localhost:5173
+### Step 4: Run Backend Server
 
-4️⃣ Run Backend Server
+```bash
 npm run dev
+```
 
+Backend runs on:
 
-Backend will run on:
+```
+http://localhost:5000
+```
 
-http://localhost:9090
+---
 
-🎨 Frontend Setup
-5️⃣ Install Frontend Dependencies
-cd ../frontend
+## 8️⃣ Frontend Setup
+
+### Step 1: Navigate to Frontend Folder
+
+```bash
+cd frontend
+```
+
+### Step 2: Install Dependencies
+
+```bash
 npm install
+```
 
-6️⃣ Create .env file (Frontend)
-VITE_API_BASE_URL=http://localhost:9090/api
+### Step 3: Create `.env` File in Frontend
 
-7️⃣ Run Frontend
+```env
+REACT_APP_API_BASE_URL=http://localhost:5000/api/v1
+```
+
+### Step 4: Run Frontend Server
+
+```bash
+npm start
+```
+
+Frontend runs on:
+
+```
+http://localhost:3000
+```
+
+---
+
+## 9️⃣ Environment Variables Setup
+
+### Backend `.env`
+
+* PORT
+* DB Credentials
+* JWT Secret & Expiry
+
+### Frontend `.env`
+
+* API Base URL
+
+⚠️ **Never commit `.env` files to GitHub**
+
+---
+
+## 🔟 Database Schema (Sample)
+
+### Users Table
+
+* id
+* name
+* email
+* password
+* role (user / admin)
+* created_at
+
+### Entity Table (Tasks / Notes / Products)
+
+* id
+* title
+* description
+* created_by
+* created_at
+
+---
+
+## 1️⃣1️⃣ API Documentation
+
+* Swagger UI / Postman Collection available
+* Includes:
+
+  * Auth APIs
+  * Protected routes
+  * CRUD endpoints
+
+---
+
+## 1️⃣2️⃣ Security & Scalability Notes
+
+* JWT-based authentication
+* Password hashing with bcrypt
+* Role-based route protection
+* Modular folder structure
+
+### Scalability Considerations
+
+* Can be split into microservices
+* Redis caching for frequent reads (optional)
+* Load balancer for horizontal scaling
+* Docker support (optional)
+
+---
+
+## 1️⃣3️⃣ Common Commands
+
+```bash
+npm install
+npm start
 npm run dev
+```
 
+---
 
-Frontend will run on:
 
-http://localhost:5173
 
-🔐 Authentication & Authorization
-Roles
+---
 
-ADMIN
-
-USER
-
-Authentication Flow
-
-Passwords are securely hashed using bcrypt
-
-JWT Access & Refresh tokens are generated
-
-Tokens are stored in httpOnly cookies
-
-Protected routes use JWT verification middleware
-
-Admin routes are protected using role-based middleware
-
-🧠 Core Functionalities
-👤 User Features
-
-User Registration
-
-User Login
-
-Secure Logout
-
-Update Password
-
-View Assigned Tasks
-
-Complete Assigned Tasks
-
-View Completed Tasks with Timestamp
-
-🛠 Admin Features
-
-Admin Dashboard
-
-Create Tasks
-
-Assign Tasks to Users
-
-Update Tasks (Only PENDING tasks)
-
-Delete Tasks
-
-View All Users
-
-Promote User to Admin
-
-View Task Completion Status
-
-📋 Task Management Logic
-
-Admin assigns tasks to users
-
-Task Status:
-
-PENDING
-
-COMPLETED
-
-Only PENDING tasks are editable
-
-When a user completes a task:
-
-Status updates to COMPLETED
-
-completedAt timestamp is saved
-
-Admin can track which user completed which task
-
-📊 Admin Dashboard Statistics
-
-Total Users
-
-Total Tasks Assigned
-
-Pending Tasks Count
-
-Completed Tasks Count
-
-Users with Assigned Tasks
-
-📑 API Design
-
-REST-compliant APIs
-
-Proper HTTP status codes
-
-Centralized error handling
-
-API versioning (/api/v1)
-
-Clean and modular controller structure
-
-🔒 Security Practices
-
-JWT-based authentication
-
-Refresh token rotation
-
-Password hashing with bcrypt
-
-Input validation & sanitization
-
-Protected routes using middleware
-
-Secure cookie configuration (Production ready)
-
-⚡ Scalability & Architecture
-
-Modular MVC architecture
-
-Easy to extend for:
-
-Redis caching
-
-Docker containers
-
-Microservices
-
-Load balancing with NGINX
-
-Frontend and backend deployed independently
-
-🌍 Deployment
-Backend
-
-Hosted on Render
-
-Production-ready CORS configuration
-
-Secure cookie-based authentication
-
-Frontend
-
-Hosted on Vercel
-
-Connected to production backend APIs
-
-✅ Assignment Completion Summary
-
-✔ Authentication & Authorization
-✔ Role-Based Access Control
-✔ CRUD APIs
-✔ Secure JWT Handling
-✔ Database Design
-✔ Functional Frontend
-✔ Production Deployment
-✔ Scalable Architecture
-
-## 📂 Project Structure
 
